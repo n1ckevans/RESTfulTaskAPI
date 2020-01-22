@@ -1,0 +1,60 @@
+<h1>Restful Tasks API</h1>
+
+
+<form (submit)="create()" >
+    <div>
+      <label>Title: </label>
+      <input type="text" name="title" [(ngModel)]="newTask.title">
+    </div>
+    <div>
+      <label>Description: </label>
+      <input type="text" name="description" [(ngModel)]="newTask.description">
+    </div>
+    <div>
+      <label>Completed: </label>
+      <input type="checkbox" name="completed" [(ngModel)]="newTask.completed">
+    </div>
+    <button>Submit</button>
+  </form>
+
+
+  <hr>
+
+
+<button (click)="getTasksFromService()">Get All Tasks</button>
+
+<div *ngIf="tasks" class="select-task">
+
+<ul *ngFor="let task of tasks">
+  <li>Title: {{ task.title }} <br> Description: {{ task.description }} <br> Completed: {{ task.completed }}</li>
+  <button (click)="selectTask(task)">Show</button>
+  <!-- <button (click)="selectTask(task)"> Edit Task </button> -->
+  <button (click)="delete(task)"> Delete Task </button>
+</ul>
+</div>
+
+
+<!-- <div *ngIf="selectedTask" class="select-task">
+  <h1>Edit Task</h1>
+  <form (submit)="edit(selectedTask)" >
+      <div>
+        <label>Title: </label>
+        <input type="text" name="title" [(ngModel)]="selectedTask.title">
+      </div>
+      <div>
+        <label>Description: </label>
+        <input type="text" name="description" [(ngModel)]="selectedTask.description">
+      </div>
+      <div>
+        <label>Completed: </label>
+        <input type="checkbox" name="completed" [(ngModel)]="selectedTask.completed">
+      </div>
+      <button>Submit</button>
+    </form>
+
+</div> -->
+
+
+<app-task *ngIf="selectedTask" [selectTask]="selectedTask"></app-task> 
+
+<router-outlet></router-outlet>
